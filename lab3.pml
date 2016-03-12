@@ -12,10 +12,9 @@ proctype PCount() {
   (qruns == FALSE || t == PTURN);
   
   //critical section
-  temp = n;
-  n = temp + 1;
-  pcount++;
+  n++;
   printf("count via pid %d at pcount %d/10: %d\n", _pid, pcount, n);
+  pcount++;
   pruns = FALSE
 }
 
@@ -26,10 +25,9 @@ proctype QCount(){
   (pruns == FALSE || t == QTURN);
   
   //critical section
-  temp = n;
-  n = temp + 1;
-  qcount++;
+  n++;
   printf("count via pid %d at qcount %d/10: %d\n", _pid, qcount, n);
+  qcount++;
   qruns = false
 }
 
@@ -37,17 +35,16 @@ init {
   pcount = 1;
   qcount = 1;
   do
-    ::(pcount <= 10 || qcount <= 10)
+    ::(pcount < 10) || (qcount < 10)
     if
-      ::pcount <= 10 -> 
+      ::pcount < 10 -> 
         if
           ::run PCount();
-        fi;   
-      ::qcount <= 10 ->
-        if
           ::run QCount();
-        fi;
+        fi;   
     fi;
-    ::else -> break;
+    ::else -> goto end;
   od
+  end:
+  printf("exiting\n");
 }
