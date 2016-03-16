@@ -17,16 +17,16 @@
 		goto R999;
 ;
 		;
-		;
-		;
 		
-	case 7: // STATE 5
+	case 6: // STATE 4
 		;
 		;
 		delproc(0, now._nr_pr-1);
 		;
 		goto R999;
-
+;
+		;
+		
 	case 8: // STATE 6
 		;
 		;
@@ -36,7 +36,7 @@
 ;
 		;
 		
-	case 10: // STATE 17
+	case 10: // STATE 15
 		;
 		p_restor(II);
 		;

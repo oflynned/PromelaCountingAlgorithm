@@ -129,10 +129,10 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define nstates2	18	/* :init: */
+#define nstates2	16	/* :init: */
 #define minseq2	16
-#define maxseq2	32
-#define endstate2	17
+#define maxseq2	30
+#define endstate2	15
 
 #define nstates1	9	/* QCount */
 #define minseq1	8
@@ -172,44 +172,44 @@ extern S_F_MAP src_file0[];
 typedef struct P2 { /* :init: */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P2;
-#define Air2	(sizeof(P2) - 3)
+#define Air2	(sizeof(P2) - 2)
 
 #define PQCount	((P1 *)this)
 typedef struct P1 { /* QCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P1;
-#define Air1	(sizeof(P1) - 3)
+#define Air1	(sizeof(P1) - 2)
 
 #define PPCount	((P0 *)this)
 typedef struct P0 { /* PCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P0;
-#define Air0	(sizeof(P0) - 3)
+#define Air0	(sizeof(P0) - 2)
 
 typedef struct P3 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P3;
-#define Air3	(sizeof(P3) - 3)
+#define Air3	(sizeof(P3) - 2)
 
 #define Pclaim	P0
 #ifndef NCLAIMS

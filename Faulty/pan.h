@@ -129,10 +129,10 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define nstates2	16	/* :init: */
+#define nstates2	21	/* :init: */
 #define minseq2	10
-#define maxseq2	24
-#define endstate2	15
+#define maxseq2	29
+#define endstate2	20
 
 #define nstates1	6	/* QCount */
 #define minseq1	5
@@ -152,8 +152,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	21
-#define _T2	22
+#define _T5	26
+#define _T2	27
 #define WS		8 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -172,44 +172,44 @@ extern S_F_MAP src_file0[];
 typedef struct P2 { /* :init: */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P2;
-#define Air2	(sizeof(P2) - 2)
+#define Air2	(sizeof(P2) - 3)
 
 #define PQCount	((P1 *)this)
 typedef struct P1 { /* QCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P1;
-#define Air1	(sizeof(P1) - 2)
+#define Air1	(sizeof(P1) - 3)
 
 #define PPCount	((P0 *)this)
 typedef struct P0 { /* PCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P0;
-#define Air0	(sizeof(P0) - 2)
+#define Air0	(sizeof(P0) - 3)
 
 typedef struct P3 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P3;
-#define Air3	(sizeof(P3) - 2)
+#define Air3	(sizeof(P3) - 3)
 
 #define Pclaim	P0
 #ifndef NCLAIMS
@@ -796,7 +796,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	23
+#define NTRANS	28
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

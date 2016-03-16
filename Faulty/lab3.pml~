@@ -20,13 +20,12 @@ init {
   n = 0;
   do
   :: if
-     :: (pcount <= 10) ->
-        run PCount()
-     :: (qcount <= 10) -> 
+     :: (pcount < 10 && qcount < 10) ->
+        run PCount();
         run QCount()
-     :: (pcount > 10 && qcount <= 10) -> 
+     :: (pcount >= 10 && qcount < 10) -> 
         run QCount()
-     :: (qcount > 10 && pcount <= 10) -> 
+     :: (qcount >= 10 && pcount < 10) -> 
         run PCount()
      :: else -> goto end
      fi

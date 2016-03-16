@@ -26,30 +26,27 @@ settable(void)
 
 	/* proctype 2: :init: */
 
-	trans[2] = (Trans **) emalloc(18*sizeof(Trans *));
+	trans[2] = (Trans **) emalloc(16*sizeof(Trans *));
 
 	trans[2][1]	= settr(16,0,2,3,3,"pcount = 1", 1, 2, 0);
-	trans[2][2]	= settr(17,0,13,4,4,"qcount = 1", 1, 2, 0);
-	trans[2][14]	= settr(29,0,13,1,0,".(goto)", 0, 2, 0);
-	T = trans[2][13] = settr(28,0,0,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(28,0,3,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(28,0,11,0,0,"DO", 0, 2, 0);
-	trans[2][3]	= settr(18,0,9,5,0,"(((pcount<10)||(qcount<10)))", 1, 2, 0);
+	trans[2][2]	= settr(17,0,11,4,4,"qcount = 1", 1, 2, 0);
+	trans[2][12]	= settr(27,0,11,1,0,".(goto)", 0, 2, 0);
+	T = trans[2][11] = settr(26,0,0,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(26,0,9,0,0,"DO", 0, 2, 0);
 	T = trans[2][9] = settr(24,0,0,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(24,0,4,0,0,"IF", 0, 2, 0);
-	trans[2][4]	= settr(19,0,7,6,0,"((pcount<10))", 1, 2, 0);
-	T = trans[2][7] = settr(22,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(22,0,5,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(22,0,6,0,0,"IF", 0, 2, 0);
-	trans[2][5]	= settr(20,0,13,7,7,"(run PCount())", 0, 2, 0);
-	trans[2][8]	= settr(23,0,13,1,0,".(goto)", 0, 2, 0);
-	trans[2][6]	= settr(21,0,13,8,8,"(run QCount())", 0, 2, 0);
-	trans[2][10]	= settr(25,0,13,1,0,".(goto)", 0, 2, 0);
-	trans[2][11]	= settr(26,0,16,2,0,"else", 0, 2, 0);
-	trans[2][12]	= settr(27,0,16,1,0,"goto end", 0, 2, 0);
-	trans[2][15]	= settr(30,0,16,1,0,"break", 0, 2, 0);
-	trans[2][16]	= settr(31,0,17,9,0,"printf('exiting\\n')", 0, 2, 0);
-	trans[2][17]	= settr(32,0,0,10,10,"-end-", 0, 3500, 0);
+	T = T->nxt	= settr(24,0,3,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(24,0,5,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(24,0,7,0,0,"IF", 0, 2, 0);
+	trans[2][3]	= settr(18,0,4,5,0,"((pcount<10))", 1, 2, 0);
+	trans[2][4]	= settr(19,0,11,6,6,"(run PCount())", 0, 2, 0);
+	trans[2][10]	= settr(25,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[2][5]	= settr(20,0,6,7,0,"((qcount<10))", 1, 2, 0);
+	trans[2][6]	= settr(21,0,11,8,8,"(run QCount())", 0, 2, 0);
+	trans[2][7]	= settr(22,0,14,2,0,"else", 0, 2, 0);
+	trans[2][8]	= settr(23,0,14,1,0,"goto end", 0, 2, 0);
+	trans[2][13]	= settr(28,0,14,1,0,"break", 0, 2, 0);
+	trans[2][14]	= settr(29,0,15,9,0,"printf('exiting\\n')", 0, 2, 0);
+	trans[2][15]	= settr(30,0,0,10,10,"-end-", 0, 3500, 0);
 
 	/* proctype 1: QCount */
 

@@ -26,47 +26,54 @@ settable(void)
 
 	/* proctype 2: :init: */
 
-	trans[2] = (Trans **) emalloc(16*sizeof(Trans *));
+	trans[2] = (Trans **) emalloc(21*sizeof(Trans *));
 
 	trans[2][1]	= settr(10,0,2,3,3,"pcount = 1", 1, 2, 0);
 	trans[2][2]	= settr(11,0,3,4,4,"qcount = 1", 1, 2, 0);
-	trans[2][3]	= settr(12,0,11,5,5,"n = 0", 1, 2, 0);
-	trans[2][12]	= settr(21,0,11,1,0,".(goto)", 0, 2, 0);
-	T = trans[2][11] = settr(20,0,0,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(20,0,4,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(20,0,9,0,0,"DO", 0, 2, 0);
-	trans[2][4]	= settr(13,0,7,6,0,"(((pcount<10)||(qcount<10)))", 1, 2, 0);
-	T = trans[2][7] = settr(16,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(16,0,5,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(16,0,6,0,0,"IF", 0, 2, 0);
-	trans[2][5]	= settr(14,0,11,7,7,"(run PCount())", 0, 2, 0);
-	trans[2][8]	= settr(17,0,11,1,0,".(goto)", 0, 2, 0);
-	trans[2][6]	= settr(15,0,11,8,8,"(run QCount())", 0, 2, 0);
-	trans[2][9]	= settr(18,0,14,2,0,"else", 0, 2, 0);
-	trans[2][10]	= settr(19,0,14,1,0,"goto end", 0, 2, 0);
-	trans[2][13]	= settr(22,0,14,1,0,"break", 0, 2, 0);
-	trans[2][14]	= settr(23,0,15,9,0,"printf('exiting\\n')", 0, 2, 0);
-	trans[2][15]	= settr(24,0,0,10,10,"-end-", 0, 3500, 0);
+	trans[2][3]	= settr(12,0,16,5,5,"n = 0", 1, 2, 0);
+	trans[2][17]	= settr(26,0,16,1,0,".(goto)", 0, 2, 0);
+	T = trans[2][16] = settr(25,0,0,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(25,0,14,0,0,"DO", 0, 2, 0);
+	T = trans[2][14] = settr(23,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(23,0,4,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(23,0,6,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(23,0,8,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(23,0,10,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(23,0,12,0,0,"IF", 0, 2, 0);
+	trans[2][4]	= settr(13,0,5,6,0,"((pcount<10))", 1, 2, 0);
+	trans[2][5]	= settr(14,0,16,7,7,"(run PCount())", 0, 2, 0);
+	trans[2][15]	= settr(24,0,16,1,0,".(goto)", 0, 2, 0);
+	trans[2][6]	= settr(15,0,7,8,0,"((qcount<10))", 1, 2, 0);
+	trans[2][7]	= settr(16,0,16,9,9,"(run QCount())", 0, 2, 0);
+	trans[2][8]	= settr(17,0,9,10,0,"(((pcount>=10)&&(qcount<10)))", 1, 2, 0);
+	trans[2][9]	= settr(18,0,16,11,11,"(run QCount())", 0, 2, 0);
+	trans[2][10]	= settr(19,0,11,12,0,"(((qcount>=10)&&(pcount<10)))", 1, 2, 0);
+	trans[2][11]	= settr(20,0,16,13,13,"(run PCount())", 0, 2, 0);
+	trans[2][12]	= settr(21,0,19,2,0,"else", 0, 2, 0);
+	trans[2][13]	= settr(22,0,19,1,0,"goto end", 0, 2, 0);
+	trans[2][18]	= settr(27,0,19,1,0,"break", 0, 2, 0);
+	trans[2][19]	= settr(28,0,20,14,0,"printf('exiting\\n')", 0, 2, 0);
+	trans[2][20]	= settr(29,0,0,15,15,"-end-", 0, 3500, 0);
 
 	/* proctype 1: QCount */
 
 	trans[1] = (Trans **) emalloc(6*sizeof(Trans *));
 
-	trans[1][1]	= settr(5,0,2,11,11,"temp = n", 1, 2, 0);
-	trans[1][2]	= settr(6,0,3,12,12,"n = (temp+1)", 1, 2, 0);
-	trans[1][3]	= settr(7,0,4,13,0,"printf('count via pid %d at qcount %d/10: %d\\n',_pid,qcount,n)", 1, 2, 0);
-	trans[1][4]	= settr(8,0,5,14,14,"qcount = (qcount+1)", 1, 2, 0);
-	trans[1][5]	= settr(9,0,0,15,15,"-end-", 0, 3500, 0);
+	trans[1][1]	= settr(5,0,2,16,16,"temp = n", 1, 2, 0);
+	trans[1][2]	= settr(6,0,3,17,17,"n = (temp+1)", 1, 2, 0);
+	trans[1][3]	= settr(7,0,4,18,0,"printf('count via pid %d at qcount %d/10: %d\\n',_pid,qcount,n)", 1, 2, 0);
+	trans[1][4]	= settr(8,0,5,19,19,"qcount = (qcount+1)", 1, 2, 0);
+	trans[1][5]	= settr(9,0,0,20,20,"-end-", 0, 3500, 0);
 
 	/* proctype 0: PCount */
 
 	trans[0] = (Trans **) emalloc(6*sizeof(Trans *));
 
-	trans[0][1]	= settr(0,0,2,16,16,"temp = n", 1, 2, 0);
-	trans[0][2]	= settr(1,0,3,17,17,"n = (temp+1)", 1, 2, 0);
-	trans[0][3]	= settr(2,0,4,18,0,"printf('count via pid %d at pcount %d/10: %d\\n',_pid,pcount,n)", 1, 2, 0);
-	trans[0][4]	= settr(3,0,5,19,19,"pcount = (pcount+1)", 1, 2, 0);
-	trans[0][5]	= settr(4,0,0,20,20,"-end-", 0, 3500, 0);
+	trans[0][1]	= settr(0,0,2,21,21,"temp = n", 1, 2, 0);
+	trans[0][2]	= settr(1,0,3,22,22,"n = (temp+1)", 1, 2, 0);
+	trans[0][3]	= settr(2,0,4,23,0,"printf('count via pid %d at pcount %d/10: %d\\n',_pid,pcount,n)", 1, 2, 0);
+	trans[0][4]	= settr(3,0,5,24,24,"pcount = (pcount+1)", 1, 2, 0);
+	trans[0][5]	= settr(4,0,0,25,25,"-end-", 0, 3500, 0);
 	/* np_ demon: */
 	trans[_NP_] = (Trans **) emalloc(2*sizeof(Trans *));
 	T = trans[_NP_][0] = settr(9997,0,1,_T5,0,"(np_)", 1,2,0);

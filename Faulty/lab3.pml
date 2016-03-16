@@ -24,10 +24,6 @@ init {
         run PCount()
      :: (qcount < 10) -> 
         run QCount()
-     :: (pcount >= 10 && qcount < 10) -> 
-        run QCount()
-     :: (qcount >= 10 && pcount < 10) -> 
-        run PCount()
      :: else -> goto end
      fi
   od

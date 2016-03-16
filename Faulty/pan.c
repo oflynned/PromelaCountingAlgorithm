@@ -485,18 +485,18 @@ int _;	/* predefined write-only variable */
 #endif
 
 short src_ln2 [] = {
-	  0,  18,  19,  20,  22,  24,  25,  23, 
-	 27,  27,  27,  21,  29,  21,  30,  31, 
-	  0, };
+	  0,  18,  19,  20,  23,  24,  25,  26, 
+	 27,  28,  29,  30,  31,  31,  22,  33, 
+	 21,  34,  21,  35,  36,   0, };
 S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
-	{ "lab3.pml", 1, 15 },
-	{ "-", 16, 17 }
+	{ "lab3.pml", 1, 20 },
+	{ "-", 21, 22 }
 };
 uchar reached2 [] = {
-	  0,   0,   0,   0,   1,   1,   1,   0, 
-	  1,   1,   1,   0,   1,   1,   0,   0, 
-	  0, };
+	  0,   0,   0,   0,   1,   0,   1,   0, 
+	  1,   0,   1,   0,   1,   1,   1,   1, 
+	  0,   1,   1,   0,   0,   0, };
 uchar *loopstate2;
 
 short src_ln1 [] = {
@@ -991,7 +991,7 @@ run(void)
 	if ((Maxbody % WS) != 0)
 		Maxbody += WS - (Maxbody % WS);
 
-	stopstate[2][14] = 1;
+	stopstate[2][19] = 1;
 	retrans(0, nstates0, start0, src_ln0, reached0, loopstate0);
 	retrans(1, nstates1, start1, src_ln1, reached1, loopstate1);
 	retrans(2, nstates2, start2, src_ln2, reached2, loopstate2);
@@ -14046,7 +14046,7 @@ c_chandump(int unused)
 {	unused++; /* avoid complaints */
 }
 
-Trans *t_id_lkup[25];
+Trans *t_id_lkup[30];
 
 
 #ifdef BFS_PAR

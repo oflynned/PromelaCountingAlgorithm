@@ -485,23 +485,23 @@ int _;	/* predefined write-only variable */
 #endif
 
 short src_ln2 [] = {
-	  0,  35,  36,  38,  40,  42,  43,  41, 
-	 45,  39,  46,  46,  46,  37,  48,  37, 
-	 49,  50,   0, };
+	  0,  31,  32,  35,  36,  37,  38,  39, 
+	 39,  34,  41,  33,  42,  33,  43,  44, 
+	  0, };
 S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
-	{ "lab3.pml", 1, 17 },
-	{ "-", 18, 19 }
+	{ "lab3.pml", 1, 15 },
+	{ "-", 16, 17 }
 };
 uchar reached2 [] = {
-	  0,   0,   0,   1,   1,   1,   1,   0, 
-	  1,   0,   1,   1,   1,   0,   1,   1, 
-	  0,   0,   0, };
+	  0,   0,   0,   1,   0,   1,   0,   1, 
+	  1,   1,   1,   0,   1,   1,   0,   0, 
+	  0, };
 uchar *loopstate2;
 
 short src_ln1 [] = {
-	  0,  22,  23,  25,  28,  29,  30,  31, 
-	 32,   0, };
+	  0,  20,  21,  22,  24,  25,  26,  27, 
+	 28,   0, };
 S_F_MAP src_file1 [] = {
 	{ "-", 0, 0 },
 	{ "lab3.pml", 1, 8 },
@@ -513,8 +513,8 @@ uchar reached1 [] = {
 uchar *loopstate1;
 
 short src_ln0 [] = {
-	  0,   9,  10,  12,  15,  16,  17,  18, 
-	 19,   0, };
+	  0,   9,  10,  11,  13,  14,  15,  16, 
+	 17,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
 	{ "lab3.pml", 1, 8 },
@@ -995,7 +995,7 @@ run(void)
 	if ((Maxbody % WS) != 0)
 		Maxbody += WS - (Maxbody % WS);
 
-	stopstate[2][16] = 1;
+	stopstate[2][14] = 1;
 	retrans(0, nstates0, start0, src_ln0, reached0, loopstate0);
 	retrans(1, nstates1, start1, src_ln1, reached1, loopstate1);
 	retrans(2, nstates2, start2, src_ln2, reached2, loopstate2);
@@ -14055,7 +14055,7 @@ c_chandump(int unused)
 {	unused++; /* avoid complaints */
 }
 
-Trans *t_id_lkup[33];
+Trans *t_id_lkup[31];
 
 
 #ifdef BFS_PAR
