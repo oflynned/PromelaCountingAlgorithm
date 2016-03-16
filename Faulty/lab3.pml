@@ -7,7 +7,7 @@ proctype PCount() {
   pcount++;
 }
 
-proctype QCount(){
+proctype QCount() {
   temp = n;
   n = temp + 1;
   printf("count via pid %d at qcount %d/10: %d\n", _pid, qcount, n);
@@ -19,12 +19,17 @@ init {
   qcount = 1;
   n = 0;
   do
-    ::(pcount < 10) || (qcount < 10)
-    if
-      ::run PCount();
-      ::run QCount();
-    fi;
-    ::else -> goto end;
+  :: if
+     :: (pcount < 10) ->
+        run PCount()
+     :: (qcount < 10) -> 
+        run QCount()
+     :: (pcount >= 10 && qcount < 10) -> 
+        run QCount()
+     :: (qcount >= 10 && pcount < 10) -> 
+        run PCount()
+     :: else -> goto end
+     fi
   od
   end:
   printf("exiting\n");
