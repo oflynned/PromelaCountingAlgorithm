@@ -20,29 +20,9 @@
 		_m = 3; goto P999;
 
 		 /* PROC :init: */
-	case 3: // STATE 1 - lab3.pml:18 - [pcount = 1] (0:0:1 - 1)
+	case 3: // STATE 1 - lab3.pml:36 - [n = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][1] = 1;
-		(trpt+1)->bup.oval = now.pcount;
-		now.pcount = 1;
-#ifdef VAR_RANGES
-		logval("pcount", now.pcount);
-#endif
-		;
-		_m = 3; goto P999; /* 0 */
-	case 4: // STATE 2 - lab3.pml:19 - [qcount = 1] (0:0:1 - 1)
-		IfNotBlocked
-		reached[2][2] = 1;
-		(trpt+1)->bup.oval = now.qcount;
-		now.qcount = 1;
-#ifdef VAR_RANGES
-		logval("qcount", now.qcount);
-#endif
-		;
-		_m = 3; goto P999; /* 0 */
-	case 5: // STATE 3 - lab3.pml:20 - [n = 0] (0:0:1 - 1)
-		IfNotBlocked
-		reached[2][3] = 1;
 		(trpt+1)->bup.oval = now.n;
 		now.n = 0;
 #ifdef VAR_RANGES
@@ -50,146 +30,164 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 6: // STATE 4 - lab3.pml:23 - [((pcount<10))] (0:0:0 - 1)
+	case 4: // STATE 2 - lab3.pml:38 - [(run PCount())] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][2] = 1;
+		if (!(addproc(II, 1, 0)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 5: // STATE 3 - lab3.pml:39 - [(run QCount())] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][3] = 1;
+		if (!(addproc(II, 1, 1)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 6: // STATE 4 - lab3.pml:41 - [assert((n!=2))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][4] = 1;
-		if (!((now.pcount<10)))
-			continue;
+		spin_assert((now.n!=2), "(n!=2)", II, tt, t);
 		_m = 3; goto P999; /* 0 */
-	case 7: // STATE 5 - lab3.pml:24 - [(run PCount())] (0:0:0 - 1)
+	case 7: // STATE 5 - lab3.pml:42 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][5] = 1;
-		if (!(addproc(II, 1, 0)))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 8: // STATE 6 - lab3.pml:25 - [((qcount<10))] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][6] = 1;
-		if (!((now.qcount<10)))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 9: // STATE 7 - lab3.pml:26 - [(run QCount())] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][7] = 1;
-		if (!(addproc(II, 1, 1)))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 10: // STATE 8 - lab3.pml:27 - [(((pcount>=10)&&(qcount<10)))] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][8] = 1;
-		if (!(((now.pcount>=10)&&(now.qcount<10))))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 11: // STATE 9 - lab3.pml:28 - [(run QCount())] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][9] = 1;
-		if (!(addproc(II, 1, 1)))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 12: // STATE 10 - lab3.pml:29 - [(((qcount>=10)&&(pcount<10)))] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][10] = 1;
-		if (!(((now.qcount>=10)&&(now.pcount<10))))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 13: // STATE 11 - lab3.pml:30 - [(run PCount())] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][11] = 1;
-		if (!(addproc(II, 1, 0)))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 14: // STATE 19 - lab3.pml:35 - [printf('exiting\\n')] (0:0:0 - 3)
-		IfNotBlocked
-		reached[2][19] = 1;
-		Printf("exiting\n");
-		_m = 3; goto P999; /* 0 */
-	case 15: // STATE 20 - lab3.pml:36 - [-end-] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][20] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC QCount */
-	case 16: // STATE 1 - lab3.pml:11 - [temp = n] (0:0:1 - 1)
+	case 8: // STATE 1 - lab3.pml:22 - [i = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[1][1] = 1;
-		(trpt+1)->bup.oval = now.temp;
-		now.temp = now.n;
+		(trpt+1)->bup.oval = now.i;
+		now.i = 1;
 #ifdef VAR_RANGES
-		logval("temp", now.temp);
+		logval("i", now.i);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 17: // STATE 2 - lab3.pml:12 - [n = (temp+1)] (0:0:1 - 1)
+	case 9: // STATE 2 - lab3.pml:22 - [((i<=20))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][2] = 1;
+		if (!((now.i<=20)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 10: // STATE 3 - lab3.pml:24 - [((i<=20))] (0:0:0 - 1)
+		IfNotBlocked
+		reached[1][3] = 1;
+		if (!((now.i<=20)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 11: // STATE 4 - lab3.pml:26 - [temp = n] (0:0:1 - 1)
+		IfNotBlocked
+		reached[1][4] = 1;
+		(trpt+1)->bup.oval = ((P1 *)this)->_2_2_temp;
+		((P1 *)this)->_2_2_temp = now.n;
+#ifdef VAR_RANGES
+		logval("QCount:temp", ((P1 *)this)->_2_2_temp);
+#endif
+		;
+		_m = 3; goto P999; /* 0 */
+	case 12: // STATE 5 - lab3.pml:26 - [n = (temp+1)] (0:0:1 - 1)
+		IfNotBlocked
+		reached[1][5] = 1;
 		(trpt+1)->bup.oval = now.n;
-		now.n = (now.temp+1);
+		now.n = (((P1 *)this)->_2_2_temp+1);
 #ifdef VAR_RANGES
 		logval("n", now.n);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 18: // STATE 3 - lab3.pml:13 - [printf('count via pid %d at qcount %d/10: %d\\n',_pid,qcount,n)] (0:0:0 - 1)
+	case 13: // STATE 6 - lab3.pml:27 - [printf('count via pid %d at qcount %d/20: %d\\n',_pid,i,n)] (0:0:0 - 1)
 		IfNotBlocked
-		reached[1][3] = 1;
-		Printf("count via pid %d at qcount %d/10: %d\n", ((int)((P1 *)this)->_pid), now.qcount, now.n);
+		reached[1][6] = 1;
+		Printf("count via pid %d at qcount %d/20: %d\n", ((int)((P1 *)this)->_pid), now.i, now.n);
 		_m = 3; goto P999; /* 0 */
-	case 19: // STATE 4 - lab3.pml:14 - [qcount = (qcount+1)] (0:0:1 - 1)
+	case 14: // STATE 11 - lab3.pml:22 - [i = (i+1)] (0:0:1 - 2)
 		IfNotBlocked
-		reached[1][4] = 1;
-		(trpt+1)->bup.oval = now.qcount;
-		now.qcount = (now.qcount+1);
+		reached[1][11] = 1;
+		(trpt+1)->bup.oval = now.i;
+		now.i = (now.i+1);
 #ifdef VAR_RANGES
-		logval("qcount", now.qcount);
+		logval("i", now.i);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 20: // STATE 5 - lab3.pml:15 - [-end-] (0:0:0 - 1)
+	case 15: // STATE 17 - lab3.pml:32 - [printf('exited with iteration %d',i)] (0:0:0 - 5)
 		IfNotBlocked
-		reached[1][5] = 1;
+		reached[1][17] = 1;
+		Printf("exited with iteration %d", now.i);
+		_m = 3; goto P999; /* 0 */
+	case 16: // STATE 18 - lab3.pml:33 - [-end-] (0:0:0 - 1)
+		IfNotBlocked
+		reached[1][18] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC PCount */
-	case 21: // STATE 1 - lab3.pml:4 - [temp = n] (0:0:1 - 1)
+	case 17: // STATE 1 - lab3.pml:8 - [i = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][1] = 1;
-		(trpt+1)->bup.oval = now.temp;
-		now.temp = now.n;
+		(trpt+1)->bup.oval = now.i;
+		now.i = 1;
 #ifdef VAR_RANGES
-		logval("temp", now.temp);
+		logval("i", now.i);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 22: // STATE 2 - lab3.pml:5 - [n = (temp+1)] (0:0:1 - 1)
+	case 18: // STATE 2 - lab3.pml:8 - [((i<=20))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][2] = 1;
+		if (!((now.i<=20)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 19: // STATE 3 - lab3.pml:10 - [((i<=20))] (0:0:0 - 1)
+		IfNotBlocked
+		reached[0][3] = 1;
+		if (!((now.i<=20)))
+			continue;
+		_m = 3; goto P999; /* 0 */
+	case 20: // STATE 4 - lab3.pml:12 - [temp = n] (0:0:1 - 1)
+		IfNotBlocked
+		reached[0][4] = 1;
+		(trpt+1)->bup.oval = ((P0 *)this)->_1_1_temp;
+		((P0 *)this)->_1_1_temp = now.n;
+#ifdef VAR_RANGES
+		logval("PCount:temp", ((P0 *)this)->_1_1_temp);
+#endif
+		;
+		_m = 3; goto P999; /* 0 */
+	case 21: // STATE 5 - lab3.pml:12 - [n = (temp+1)] (0:0:1 - 1)
+		IfNotBlocked
+		reached[0][5] = 1;
 		(trpt+1)->bup.oval = now.n;
-		now.n = (now.temp+1);
+		now.n = (((P0 *)this)->_1_1_temp+1);
 #ifdef VAR_RANGES
 		logval("n", now.n);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 23: // STATE 3 - lab3.pml:6 - [printf('count via pid %d at pcount %d/10: %d\\n',_pid,pcount,n)] (0:0:0 - 1)
+	case 22: // STATE 6 - lab3.pml:13 - [printf('count via pid %d at pcount %d/20: %d\\n',_pid,i,n)] (0:0:0 - 1)
 		IfNotBlocked
-		reached[0][3] = 1;
-		Printf("count via pid %d at pcount %d/10: %d\n", ((int)((P0 *)this)->_pid), now.pcount, now.n);
+		reached[0][6] = 1;
+		Printf("count via pid %d at pcount %d/20: %d\n", ((int)((P0 *)this)->_pid), now.i, now.n);
 		_m = 3; goto P999; /* 0 */
-	case 24: // STATE 4 - lab3.pml:7 - [pcount = (pcount+1)] (0:0:1 - 1)
+	case 23: // STATE 11 - lab3.pml:8 - [i = (i+1)] (0:0:1 - 2)
 		IfNotBlocked
-		reached[0][4] = 1;
-		(trpt+1)->bup.oval = now.pcount;
-		now.pcount = (now.pcount+1);
+		reached[0][11] = 1;
+		(trpt+1)->bup.oval = now.i;
+		now.i = (now.i+1);
 #ifdef VAR_RANGES
-		logval("pcount", now.pcount);
+		logval("i", now.i);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 25: // STATE 5 - lab3.pml:8 - [-end-] (0:0:0 - 1)
+	case 24: // STATE 17 - lab3.pml:18 - [printf('exited with iteration %d',i)] (0:0:0 - 5)
 		IfNotBlocked
-		reached[0][5] = 1;
+		reached[0][17] = 1;
+		Printf("exited with iteration %d", now.i);
+		_m = 3; goto P999; /* 0 */
+	case 25: // STATE 18 - lab3.pml:19 - [-end-] (0:0:0 - 1)
+		IfNotBlocked
+		reached[0][18] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 	case  _T5:	/* np_ */

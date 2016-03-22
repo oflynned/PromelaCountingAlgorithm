@@ -1,35 +1,42 @@
-int n, temp, pcount, qcount;
+int n, i;
+
+//1 of each process, another process to monitor the counter
+//assert if n==2, true iff can never be found in the whole scope
+//processes instantiated once and then run again as same process
 
 proctype PCount() {  
-  temp = n;
-  n = temp + 1;
-  printf("count via pid %d at pcount %d/10: %d\n", _pid, pcount, n);
-  pcount++;
+  for (i : 1 .. 10) {
+    if
+    ::(i <= 20) ->
+    int temp = n
+    n = temp + 1
+    printf("count via pid %d at pcount %d/20: %d\n", _pid, i, n)
+    ::else -> goto end
+    fi;
+  }
+  end:
+  printf("exited with iteration %d", i);
 }
 
-proctype QCount() {
-  temp = n;
-  n = temp + 1;
-  printf("count via pid %d at qcount %d/10: %d\n", _pid, qcount, n);
-  qcount++;
+proctype QCount() {  
+  for (i : 1 .. 10) {
+    if
+    ::(i <= 20) ->
+    int temp = n
+    n = temp + 1
+    printf("count via pid %d at qcount %d/20: %d\n", _pid, i, n)
+    ::else -> goto end
+    fi;
+  }
+  end:
+  printf("exited with iteration %d", i);
 }
 
 init {
-  pcount = 1;
-  qcount = 1;
   n = 0;
-  do
-  :: if
-     :: (pcount < 10 && qcount < 10) ->
-        run PCount();
-        run QCount()
-     :: (pcount >= 10 && qcount < 10) -> 
-        run QCount()
-     :: (qcount >= 10 && pcount < 10) -> 
-        run PCount()
-     :: else -> goto end
-     fi
-  od
-  end:
-  printf("exiting\n");
+  
+  run PCount();
+  run QCount();
+  
+  assert (n != 2);
 }

@@ -6,61 +6,27 @@
 
 	case 3: // STATE 1
 		;
-		now.pcount = trpt->bup.oval;
+		now.n = trpt->bup.oval;
 		;
 		goto R999;
 
 	case 4: // STATE 2
 		;
-		now.qcount = trpt->bup.oval;
+		;
+		delproc(0, now._nr_pr-1);
 		;
 		goto R999;
 
 	case 5: // STATE 3
 		;
-		now.n = trpt->bup.oval;
+		;
+		delproc(0, now._nr_pr-1);
 		;
 		goto R999;
 ;
 		;
 		
 	case 7: // STATE 5
-		;
-		;
-		delproc(0, now._nr_pr-1);
-		;
-		goto R999;
-;
-		;
-		
-	case 9: // STATE 7
-		;
-		;
-		delproc(0, now._nr_pr-1);
-		;
-		goto R999;
-;
-		;
-		
-	case 11: // STATE 9
-		;
-		;
-		delproc(0, now._nr_pr-1);
-		;
-		goto R999;
-;
-		;
-		
-	case 13: // STATE 11
-		;
-		;
-		delproc(0, now._nr_pr-1);
-		;
-		goto R999;
-;
-		;
-		
-	case 15: // STATE 20
 		;
 		p_restor(II);
 		;
@@ -69,13 +35,23 @@
 
 		 /* PROC QCount */
 
-	case 16: // STATE 1
+	case 8: // STATE 1
 		;
-		now.temp = trpt->bup.oval;
+		now.i = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		;
+		;
+		
+	case 11: // STATE 4
+		;
+		((P1 *)this)->_2_2_temp = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 17: // STATE 2
+	case 12: // STATE 5
 		;
 		now.n = trpt->bup.oval;
 		;
@@ -83,13 +59,15 @@
 ;
 		;
 		
-	case 19: // STATE 4
+	case 14: // STATE 11
 		;
-		now.qcount = trpt->bup.oval;
+		now.i = trpt->bup.oval;
 		;
 		goto R999;
-
-	case 20: // STATE 5
+;
+		;
+		
+	case 16: // STATE 18
 		;
 		p_restor(II);
 		;
@@ -98,13 +76,23 @@
 
 		 /* PROC PCount */
 
-	case 21: // STATE 1
+	case 17: // STATE 1
 		;
-		now.temp = trpt->bup.oval;
+		now.i = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		;
+		;
+		
+	case 20: // STATE 4
+		;
+		((P0 *)this)->_1_1_temp = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 22: // STATE 2
+	case 21: // STATE 5
 		;
 		now.n = trpt->bup.oval;
 		;
@@ -112,13 +100,15 @@
 ;
 		;
 		
-	case 24: // STATE 4
+	case 23: // STATE 11
 		;
-		now.pcount = trpt->bup.oval;
+		now.i = trpt->bup.oval;
 		;
 		goto R999;
-
-	case 25: // STATE 5
+;
+		;
+		
+	case 25: // STATE 18
 		;
 		p_restor(II);
 		;
