@@ -129,20 +129,20 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define nstates2	6	/* :init: */
-#define minseq2	36
-#define maxseq2	40
-#define endstate2	5
+#define nstates2	9	/* :init: */
+#define minseq2	26
+#define maxseq2	33
+#define endstate2	8
 
-#define nstates1	19	/* QCount */
-#define minseq1	18
-#define maxseq1	35
-#define endstate1	18
+#define nstates1	14	/* QCount */
+#define minseq1	13
+#define maxseq1	25
+#define endstate1	13
 
-#define nstates0	19	/* PCount */
+#define nstates0	14	/* PCount */
 #define minseq0	0
-#define maxseq0	17
-#define endstate0	18
+#define maxseq0	12
+#define endstate0	13
 
 extern short src_ln2[];
 extern short src_ln1[];
@@ -152,8 +152,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	26
-#define _T2	27
+#define _T5	27
+#define _T2	28
 #define WS		8 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -172,46 +172,46 @@ extern S_F_MAP src_file0[];
 typedef struct P2 { /* :init: */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P2;
-#define Air2	(sizeof(P2) - 3)
+#define Air2	(sizeof(P2) - 2)
 
 #define PQCount	((P1 *)this)
 typedef struct P1 { /* QCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-	int _2_2_temp;
+	int temp;
 } P1;
-#define Air1	(sizeof(P1) - Offsetof(P1, _2_2_temp) - 1*sizeof(int))
+#define Air1	(sizeof(P1) - Offsetof(P1, temp) - 1*sizeof(int))
 
 #define PPCount	((P0 *)this)
 typedef struct P0 { /* PCount */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-	int _1_1_temp;
+	int temp;
 } P0;
-#define Air0	(sizeof(P0) - Offsetof(P0, _1_1_temp) - 1*sizeof(int))
+#define Air0	(sizeof(P0) - Offsetof(P0, temp) - 1*sizeof(int))
 
 typedef struct P3 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _p   : 5; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P3;
-#define Air3	(sizeof(P3) - 3)
+#define Air3	(sizeof(P3) - 2)
 
 #define Pclaim	P0
 #ifndef NCLAIMS
@@ -404,7 +404,9 @@ typedef struct State {
 	#endif
 #endif
 	int n;
-	int i;
+	int i_p;
+	int i_q;
+	int pc;
 #ifdef TRIX
 	/* room for 512 proc+chan ptrs, + safety margin */
 	char *_ids_[MAXPROC+MAXQ+4];
@@ -435,8 +437,8 @@ typedef struct TRIX_v6 {
 
 #define start3	0 /* np_ */
 #define start2	1
-#define start1	1
-#define start0	1
+#define start1	8
+#define start0	8
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
@@ -796,7 +798,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	28
+#define NTRANS	29
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

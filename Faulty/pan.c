@@ -485,44 +485,42 @@ int _;	/* predefined write-only variable */
 #endif
 
 short src_ln2 [] = {
-	  0,  36,  38,  39,  41,  42,   0, };
+	  0,  32,  33,  35,  36,  38,  39,  40, 
+	 41,   0, };
 S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
-	{ "lab3.pml", 1, 5 },
-	{ "-", 6, 7 }
+	{ "lab3.pml", 1, 8 },
+	{ "-", 9, 10 }
 };
 uchar reached2 [] = {
-	  0,   0,   0,   0,   0,   0,   0, };
+	  0,   0,   0,   0,   0,   0,   0,   0, 
+	  0,   0, };
 uchar *loopstate2;
 
 short src_ln1 [] = {
-	  0,  22,  22,  24,  26,  26,  27,  28, 
-	 28,  23,  30,  22,  30,  30,  30,  31, 
-	 30,  32,  33,   0, };
+	  0,  19,  21,  21,  22,  23,  24,  24, 
+	 18,  26,  18,  27,  28,  29,   0, };
 S_F_MAP src_file1 [] = {
 	{ "-", 0, 0 },
-	{ "lab3.pml", 1, 18 },
-	{ "-", 19, 20 }
+	{ "lab3.pml", 1, 13 },
+	{ "-", 14, 15 }
 };
 uchar reached1 [] = {
-	  0,   0,   1,   1,   0,   0,   0,   1, 
-	  1,   0,   1,   0,   1,   1,   0,   1, 
-	  1,   0,   0,   0, };
+	  0,   1,   0,   0,   0,   0,   1,   1, 
+	  0,   1,   1,   0,   0,   0,   0, };
 uchar *loopstate1;
 
 short src_ln0 [] = {
-	  0,   8,   8,  10,  12,  12,  13,  14, 
-	 14,   9,  16,   8,  16,  16,  16,  17, 
-	 16,  18,  19,   0, };
+	  0,   5,   7,   7,   8,   9,  10,  10, 
+	  4,  12,   4,  13,  14,  15,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
-	{ "lab3.pml", 1, 18 },
-	{ "-", 19, 20 }
+	{ "lab3.pml", 1, 13 },
+	{ "-", 14, 15 }
 };
 uchar reached0 [] = {
-	  0,   0,   1,   1,   0,   0,   0,   1, 
-	  1,   0,   1,   0,   1,   1,   0,   1, 
-	  1,   0,   0,   0, };
+	  0,   1,   0,   0,   0,   0,   1,   1, 
+	  0,   1,   1,   0,   0,   0,   0, };
 uchar *loopstate0;
 uchar reached3[3];  /* np_ */
 uchar *loopstate3;  /* np_ */
@@ -842,22 +840,24 @@ addproc(int calling_pid, int priority, int n)
 		reached2[1]=1;
 		/* params: */
 		/* locals: */
+#ifdef VAR_RANGES
+#endif
 #ifdef HAS_CODE
 		locinit2(h);
 #endif
 		break;
 	case 1:	/* QCount */
 		((P1 *)pptr(h))->_t = 1;
-		((P1 *)pptr(h))->_p = 1;
+		((P1 *)pptr(h))->_p = 8;
 #ifdef HAS_PRIORITY
 		((P1 *)pptr(h))->_priority = priority; /* was: 1 */
 #endif
-		reached1[1]=1;
+		reached1[8]=1;
 		/* params: */
 		/* locals: */
-		((P1 *)pptr(h))->_2_2_temp = now.n;
+		((P1 *)pptr(h))->temp = now.n;
 #ifdef VAR_RANGES
-		logval("QCount:temp", ((P1 *)pptr(h))->_2_2_temp);
+		logval("QCount:temp", ((P1 *)pptr(h))->temp);
 #endif
 #ifdef HAS_CODE
 		locinit1(h);
@@ -865,16 +865,16 @@ addproc(int calling_pid, int priority, int n)
 		break;
 	case 0:	/* PCount */
 		((P0 *)pptr(h))->_t = 0;
-		((P0 *)pptr(h))->_p = 1;
+		((P0 *)pptr(h))->_p = 8;
 #ifdef HAS_PRIORITY
 		((P0 *)pptr(h))->_priority = priority; /* was: 1 */
 #endif
-		reached0[1]=1;
+		reached0[8]=1;
 		/* params: */
 		/* locals: */
-		((P0 *)pptr(h))->_1_1_temp = now.n;
+		((P0 *)pptr(h))->temp = now.n;
 #ifdef VAR_RANGES
-		logval("PCount:temp", ((P0 *)pptr(h))->_1_1_temp);
+		logval("PCount:temp", ((P0 *)pptr(h))->temp);
 #endif
 #ifdef HAS_CODE
 		locinit0(h);
@@ -997,8 +997,8 @@ run(void)
 	if ((Maxbody % WS) != 0)
 		Maxbody += WS - (Maxbody % WS);
 
-	stopstate[1][17] = 1;
-	stopstate[0][17] = 1;
+	stopstate[1][11] = 1;
+	stopstate[0][11] = 1;
 	retrans(0, nstates0, start0, src_ln0, reached0, loopstate0);
 	retrans(1, nstates1, start1, src_ln1, reached1, loopstate1);
 	retrans(2, nstates2, start2, src_ln2, reached2, loopstate2);
@@ -12316,10 +12316,14 @@ void
 iniglobals(int calling_pid)
 {
 		now.n = 0;
-		now.i = 0;
+		now.i_p = 0;
+		now.i_q = 0;
+		now.pc = 0;
 #ifdef VAR_RANGES
 		logval("n", now.n);
-		logval("i", now.i);
+		logval("i_p", now.i_p);
+		logval("i_q", now.i_q);
+		logval("pc", now.pc);
 #endif
 }
 
@@ -14018,7 +14022,9 @@ c_globals(void)
 {	/* int i; */
 	printf("global vars:\n");
 	printf("	int    n:	%d\n", now.n);
-	printf("	int    i:	%d\n", now.i);
+	printf("	int    i_p:	%d\n", now.i_p);
+	printf("	int    i_q:	%d\n", now.i_q);
+	printf("	int    pc:	%d\n", now.pc);
 }
 void
 c_locals(int pid, int tp)
@@ -14029,11 +14035,11 @@ c_locals(int pid, int tp)
 		break;
 	case 1:
 		printf("local vars proc %d (QCount):\n", pid);
-	printf("	int    temp:	%d\n", ((P1 *)pptr(pid))->_2_2_temp);
+	printf("	int    temp:	%d\n", ((P1 *)pptr(pid))->temp);
 		break;
 	case 0:
 		printf("local vars proc %d (PCount):\n", pid);
-	printf("	int    temp:	%d\n", ((P0 *)pptr(pid))->_1_1_temp);
+	printf("	int    temp:	%d\n", ((P0 *)pptr(pid))->temp);
 		break;
 	}
 }
@@ -14049,7 +14055,7 @@ c_chandump(int unused)
 {	unused++; /* avoid complaints */
 }
 
-Trans *t_id_lkup[41];
+Trans *t_id_lkup[34];
 
 
 #ifdef BFS_PAR
