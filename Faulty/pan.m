@@ -42,10 +42,10 @@
 		if (!(addproc(II, 1, 1)))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 6: // STATE 4 - lab3.pml:41 - [assert((n!=2))] (0:0:0 - 1)
+	case 6: // STATE 4 - lab3.pml:41 - [assert((n==2))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][4] = 1;
-		spin_assert((now.n!=2), "(n!=2)", II, tt, t);
+		spin_assert((now.n==2), "(n==2)", II, tt, t);
 		_m = 3; goto P999; /* 0 */
 	case 7: // STATE 5 - lab3.pml:42 - [-end-] (0:0:0 - 1)
 		IfNotBlocked

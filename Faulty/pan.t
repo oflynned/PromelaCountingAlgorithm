@@ -31,7 +31,7 @@ settable(void)
 	trans[2][1]	= settr(36,0,2,3,3,"n = 0", 1, 2, 0);
 	trans[2][2]	= settr(37,0,3,4,4,"(run PCount())", 1, 2, 0);
 	trans[2][3]	= settr(38,0,4,5,5,"(run QCount())", 1, 2, 0);
-	trans[2][4]	= settr(39,0,5,6,0,"assert((n!=2))", 1, 2, 0);
+	trans[2][4]	= settr(39,0,5,6,0,"assert((n==2))", 1, 2, 0);
 	trans[2][5]	= settr(40,0,0,7,7,"-end-", 0, 3500, 0);
 
 	/* proctype 1: QCount */

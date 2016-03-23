@@ -38,5 +38,5 @@ init {
   run PCount();
   run QCount();
   
-  assert (n != 2);
+  assert (n == 2);
 }

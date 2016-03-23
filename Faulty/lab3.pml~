@@ -5,7 +5,7 @@ int n, i;
 //processes instantiated once and then run again as same process
 
 proctype PCount() {  
-  for (i : 1 .. 10) {
+  for (i : 1 .. 20) {
     if
     ::(i <= 20) ->
     int temp = n
@@ -19,7 +19,7 @@ proctype PCount() {
 }
 
 proctype QCount() {  
-  for (i : 1 .. 10) {
+  for (i : 1 .. 20) {
     if
     ::(i <= 20) ->
     int temp = n
